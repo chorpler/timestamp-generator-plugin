@@ -1,5 +1,6 @@
-package io.github.alexbroadbent.tsgen.config
+package us.serif.jb.tsgen.config
 
+import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
@@ -26,6 +27,7 @@ object TimestampFormatMap {
 
     private val map: Map<TimestampFormatTitle, DateTimeFormatter> = mapOf(
         TimestampFormatTitle.ISO_8601 to DateTimeFormatter.ISO_DATE_TIME.addLocaleAndZone(),
+        TimestampFormatTitle.ISO_8601_LOCAL to DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXXXX").addLocalLocaleAndZone(),
         TimestampFormatTitle.ISO_LOCAL_DATE to DateTimeFormatter.ISO_LOCAL_DATE.addLocaleAndZone(),
         TimestampFormatTitle.ISO_LOCAL_TIME to DateTimeFormatter.ISO_LOCAL_TIME.addLocaleAndZone(),
         TimestampFormatTitle.ISO_LOCAL_DATE_TIME to DateTimeFormatter.ISO_LOCAL_DATE_TIME.addLocaleAndZone(),
@@ -41,9 +43,11 @@ object TimestampFormatMap {
 }
 
 private fun DateTimeFormatter.addLocaleAndZone() = this.withLocale(Locale.UK).withZone(ZoneOffset.UTC)
+private fun DateTimeFormatter.addLocalLocaleAndZone() = this.withLocale(Locale.US).withZone(ZoneId.systemDefault())
 
 enum class TimestampFormatTitle(val title: String) {
     ISO_8601("ISO 8601"),
+    ISO_8601_LOCAL("ISO 8601 LocalDateTime"),
     ISO_LOCAL_DATE("ISO Local Date"),
     ISO_LOCAL_TIME("ISO Local Time"),
     ISO_LOCAL_DATE_TIME("ISO Local Date Time"),

@@ -1,6 +1,6 @@
-package io.github.alexbroadbent.tsgen
+package us.serif.jb.tsgen
 
-import io.github.alexbroadbent.tsgen.config.TimestampFormatTitle
+import us.serif.jb.tsgen.config.TimestampFormatTitle
 import io.kotest.matchers.shouldBe
 import java.time.Instant
 import java.time.ZoneOffset
@@ -11,6 +11,9 @@ class TimestampFormatSpec : BaseSpec({
     context("Check formatting") {
         should("cover ISO 8601 format") {
             generate(TimestampFormatTitle.ISO_8601) shouldBe "2019-03-18T10:30:20.001234567Z"
+        }
+        should("cover ISO Local DateTime format") {
+            generate(TimestampFormatTitle.ISO_8601_LOCAL) shouldBe "2019-03-18T05:30:20-05:00"
         }
         should("cover ISO Instant format") {
             generate(TimestampFormatTitle.ISO_INSTANT) shouldBe "2019-03-18T10:30:20.001234567Z"

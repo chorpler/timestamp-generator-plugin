@@ -1,4 +1,4 @@
-package io.github.alexbroadbent.tsgen
+package us.serif.jb.tsgen
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent

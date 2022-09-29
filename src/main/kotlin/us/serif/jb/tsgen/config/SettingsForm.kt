@@ -1,7 +1,7 @@
-package io.github.alexbroadbent.tsgen.config
+package us.serif.jb.tsgen.config
 
 import com.intellij.openapi.ui.ComboBox
-import io.github.alexbroadbent.tsgen.TimestampGenerator
+import us.serif.jb.tsgen.TimestampGenerator
 import java.time.Instant
 import javax.swing.DefaultComboBoxModel
 import javax.swing.JComboBox

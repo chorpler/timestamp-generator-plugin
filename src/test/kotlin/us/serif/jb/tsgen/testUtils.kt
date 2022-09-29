@@ -1,8 +1,8 @@
-package io.github.alexbroadbent.tsgen
+package us.serif.jb.tsgen
 
-import io.github.alexbroadbent.tsgen.config.TimestampFormatMap
-import io.github.alexbroadbent.tsgen.config.TimestampFormatTitle
-import io.github.alexbroadbent.tsgen.config.TimestampGeneratorSettings
+import us.serif.jb.tsgen.config.TimestampFormatMap
+import us.serif.jb.tsgen.config.TimestampFormatTitle
+import us.serif.jb.tsgen.config.TimestampGeneratorSettings
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.core.test.TestCaseOrder

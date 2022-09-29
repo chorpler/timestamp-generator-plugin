@@ -1,8 +1,8 @@
 <idea-plugin>
-    <id>io.ajab.timestamp-generator-plugin</id>
+    <id>us.serif.jb.timestamp-generator-plugin</id>
     <name>Timestamp Generator</name>
-    <version>1.0.1</version>
-    <vendor email="hello@abroadbent.com" url="https://github.com/AlexBroadbent">Alexander Broadbent</vendor>
+    <version>1.0.2</version>
+    <vendor email="plugins@serif.us" url="https://github.com/chorpler/timestamp-generator-plugin">David Sargeant</vendor>
 
     <description><![CDATA[
       A timestamp generator.<br/>
@@ -18,6 +18,7 @@
       Available formats:
       <ul>
         <li>ISO 8601</li>
+        <li>ISO Local Offset DateTime</li>
         <li>ISO Local Date</li>
         <li>ISO Local Time</li>
         <li>ISO Local Date Time</li>
@@ -30,6 +31,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>Changes in version 1.0.2:</b>
+        <ul>
+            <li>Add offset ISO 8601 format</li>
+        </ul>
         <b>Changes in version 1.0.1:</b>
         <ul>
             <li>Fix RFC 1123 format</li>
@@ -67,14 +72,14 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable instance="io.github.alexbroadbent.tsgen.config.ConfigConfigurable"/>
+        <applicationConfigurable instance="us.serif.jb.tsgen.config.ConfigConfigurable"/>
 
-        <applicationService serviceImplementation="io.github.alexbroadbent.tsgen.config.TimestampGeneratorSettings"/>
+        <applicationService serviceImplementation="us.serif.jb.tsgen.config.TimestampGeneratorSettings"/>
     </extensions>
 
     <actions>
         <action id="tsgen.insert"
-                class="io.github.alexbroadbent.tsgen.GenerateToEditorAction"
+                class="us.serif.jb.tsgen.GenerateToEditorAction"
                 text="Current Timestamp"
                 description="Generate the current timestamp">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
@@ -82,7 +87,7 @@
         </action>
 
         <action id="tsgen.copy"
-                class="io.github.alexbroadbent.tsgen.GenerateToClipboardAction"
+                class="us.serif.jb.tsgen.GenerateToClipboardAction"
                 text="Copy Current Timestamp"
                 description="Copy the current timestamp to the clipboard">
             <add-to-group group-id="GenerateGroup"/>

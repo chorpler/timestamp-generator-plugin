@@ -8,8 +8,8 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 
-group = "io.github.alexbroadbent"
-version = "1.0.1"
+group = "us.serif.jb"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -43,7 +43,7 @@ tasks {
     }
 
     patchPluginXml {
-        version.set("1.0.1")
+        version.set("1.0.2")
         sinceBuild.set("143")
         untilBuild.set("")
     }
