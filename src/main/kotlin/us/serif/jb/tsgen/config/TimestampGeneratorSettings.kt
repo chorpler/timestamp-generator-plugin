@@ -1,4 +1,4 @@
-package io.github.alexbroadbent.tsgen.config
+package us.serif.jb.tsgen.config
 
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager

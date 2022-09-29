@@ -1,6 +1,6 @@
-package io.github.alexbroadbent.tsgen
+package us.serif.jb.tsgen
 
-import io.github.alexbroadbent.tsgen.config.TimestampFormatTitle
+import us.serif.jb.tsgen.config.TimestampFormatTitle
 import io.kotest.matchers.longs.shouldBeInRange
 import java.time.Instant
 
