@@ -12,6 +12,10 @@ class TimestampFormatSpec : BaseSpec({
         should("cover ISO 8601 format") {
             generate(TimestampFormatTitle.ISO_8601) shouldBe "2019-03-18T10:30:20.001234567Z"
         }
+        should("cover ISO Offset DateTime format") {
+//            generate(TimestampFormatTitle.ISO_OFFSET_DATE_TIME) shouldBe "2019-03-18T05:30:20-05:00"
+            generate(TimestampFormatTitle.ISO_OFFSET_DATE_TIME) shouldBe "2019-03-18T05:30:20.001234567-05:00"
+        }
         should("cover ISO Local DateTime format") {
             generate(TimestampFormatTitle.ISO_8601_LOCAL) shouldBe "2019-03-18T05:30:20-05:00"
         }

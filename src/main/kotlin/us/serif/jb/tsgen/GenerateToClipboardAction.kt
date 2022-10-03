@@ -10,6 +10,7 @@ import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.wm.WindowManager
 import com.intellij.ui.awt.RelativePoint
 import com.intellij.util.ui.TextTransferable
+import java.time.temporal.ChronoUnit
 
 class GenerateToClipboardAction : AnAction() {
 

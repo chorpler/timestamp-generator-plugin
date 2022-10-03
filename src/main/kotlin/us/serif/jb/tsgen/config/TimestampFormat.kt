@@ -10,12 +10,16 @@ import java.util.Locale
 
 class TimestampFormat(
     val title: TimestampFormatTitle,
-    val format: DateTimeFormatter
+    val format: DateTimeFormatter,
+    val customFormat: String,
+    val truncateToSeconds: Boolean
 )
 
 object TimestampFormatMap {
 
-    val ISO_8601 = TimestampFormat(TimestampFormatTitle.ISO_8601, DateTimeFormatter.ISO_DATE_TIME.addLocaleAndZone())
+    val ISO_8601 = TimestampFormat(TimestampFormatTitle.ISO_8601, DateTimeFormatter.ISO_DATE_TIME.addLocaleAndZone(), "", false)
+    val ISO_OFFSET_DATE_TIME = TimestampFormat(TimestampFormatTitle.ISO_OFFSET_DATE_TIME, DateTimeFormatter.ISO_OFFSET_DATE_TIME.addLocalLocaleAndZone(), "", true)
+    val customFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
 
     private val EPOCH_SECONDS_FORMATTER = DateTimeFormatterBuilder()
         .appendValue(ChronoField.INSTANT_SECONDS, 1, 19, SignStyle.NEVER)
@@ -27,6 +31,7 @@ object TimestampFormatMap {
 
     private val map: Map<TimestampFormatTitle, DateTimeFormatter> = mapOf(
         TimestampFormatTitle.ISO_8601 to DateTimeFormatter.ISO_DATE_TIME.addLocaleAndZone(),
+        TimestampFormatTitle.ISO_OFFSET_DATE_TIME to DateTimeFormatter.ISO_OFFSET_DATE_TIME.addLocalLocaleAndZone(),
         TimestampFormatTitle.ISO_8601_LOCAL to DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXXXX").addLocalLocaleAndZone(),
         TimestampFormatTitle.ISO_LOCAL_DATE to DateTimeFormatter.ISO_LOCAL_DATE.addLocaleAndZone(),
         TimestampFormatTitle.ISO_LOCAL_TIME to DateTimeFormatter.ISO_LOCAL_TIME.addLocaleAndZone(),
@@ -39,14 +44,17 @@ object TimestampFormatMap {
     )
 
     fun getFormat(title: TimestampFormatTitle): TimestampFormat =
-        TimestampFormat(title, map[title] ?: error("Unknown format"))
+        TimestampFormat(title, map[title] ?: error("Unknown format"), customFormat,
+            title == TimestampFormatTitle.ISO_OFFSET_DATE_TIME
+        )
 }
 
 private fun DateTimeFormatter.addLocaleAndZone() = this.withLocale(Locale.UK).withZone(ZoneOffset.UTC)
-private fun DateTimeFormatter.addLocalLocaleAndZone() = this.withLocale(Locale.US).withZone(ZoneId.systemDefault())
+private fun DateTimeFormatter.addLocalLocaleAndZone() = this.withLocale(Locale.getDefault()).withZone(ZoneId.systemDefault())
 
 enum class TimestampFormatTitle(val title: String) {
     ISO_8601("ISO 8601"),
+    ISO_OFFSET_DATE_TIME("ISO 8601 Offset DateTime"),
     ISO_8601_LOCAL("ISO 8601 LocalDateTime"),
     ISO_LOCAL_DATE("ISO Local Date"),
     ISO_LOCAL_TIME("ISO Local Time"),

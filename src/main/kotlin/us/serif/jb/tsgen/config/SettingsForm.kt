@@ -3,11 +3,8 @@ package us.serif.jb.tsgen.config
 import com.intellij.openapi.ui.ComboBox
 import us.serif.jb.tsgen.TimestampGenerator
 import java.time.Instant
-import javax.swing.DefaultComboBoxModel
-import javax.swing.JComboBox
-import javax.swing.JComponent
-import javax.swing.JLabel
-import javax.swing.JPanel
+import java.time.temporal.ChronoUnit
+import javax.swing.*
 
 class SettingsForm {
 
@@ -17,6 +14,8 @@ class SettingsForm {
     private var panel: JPanel? = null
     private var previewLabel: JLabel? = null
     private var formatComboBox: JComboBox<TimestampFormatTitle>? = null
+    private var customFormatField: JTextField? = null
+    private var truncateToSecondsCheckBox: JCheckBox? = null
 
     init {
         loadSettings()
@@ -24,6 +23,8 @@ class SettingsForm {
 
     fun loadSettings() {
         formatComboBox?.selectedItem = settings.format.title
+        customFormatField?.text = settings.customFormat()
+        truncateToSecondsCheckBox?.isSelected = settings.format.truncateToSeconds
 
         sequenceOf(
             formatComboBox
@@ -40,7 +41,7 @@ class SettingsForm {
         val previewSettings = TimestampGeneratorSettings()
         applyConfigFormToSettings(previewSettings)
         previewLabel?.text =
-            TimestampGenerator.generateTimestamp(instant = previewTimestamp, settings = previewSettings)
+            TimestampGenerator.generateTimestamp(instant = previewTimestamp, settings = previewSettings, truncateTo = ChronoUnit.NANOS)
     }
 
     fun applyConfigFormToSettings(settings: TimestampGeneratorSettings) {
